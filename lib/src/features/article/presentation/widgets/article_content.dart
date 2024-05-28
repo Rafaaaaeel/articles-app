@@ -8,6 +8,20 @@ class ArticleContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(_article.title!);
+    final double radius = _article.media!.first.mediaMetadata![1].height! / 1;
+    final String? imageUrl = _article.media!.first.mediaMetadata![0].url;
+    print('=========== IMAGE URL========= $imageUrl');
+    return Row(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(radius),
+          child: Image.network(imageUrl!),
+        ),
+        const SizedBox(width: 32),
+        Flexible(
+          child: Text(_article.title!),
+        )
+      ],
+    );
   }
 }

@@ -10,7 +10,7 @@ part 'articles_api_service.g.dart';
 abstract class ArticlesApi {
   factory ArticlesApi(Dio dio) = _ArticlesApi;
 
-  @GET('/all-sections/1.json')
+  @GET('/all-sections/7.json')
   Future<ApiResponse<List<ArticleModel>>> fetchArticles({
     @Query('api-key') String? apiKey,
   });
