@@ -28,6 +28,21 @@ class AppSubTitle extends StatelessWidget {
   }
 }
 
+class AppSubTitleGrey extends StatelessWidget {
+  final String _title;
+
+  const AppSubTitleGrey(this._title, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _title,
+      style: const TextStyle(
+          fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey),
+    );
+  }
+}
+
 class AppTitleAbstract extends StatelessWidget {
   final String _title;
 

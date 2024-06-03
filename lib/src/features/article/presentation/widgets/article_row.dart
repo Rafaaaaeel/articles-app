@@ -16,7 +16,7 @@ class ArticleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaModel? media = _article.media?.first;
-    MediaMetaDataModel? mediaData = media?.mediaMetadata?.first;
+    MediaMetaDataModel? mediaData = media?.mediaMetadata?[1];
     String imageUrl = mediaData?.url ??
         "https://www.google.com/url?sa=i&url=https%3A%2F%2Fblog.iprocess.com.br%2Fplaceholder-png%2F&psig=AOvVaw3j0jW-1UAjz_9J2Ou4Kx6N&ust=1717256586422000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIigjbiduIYDFQAAAAAdAAAAABAE";
 
