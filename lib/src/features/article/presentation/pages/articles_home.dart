@@ -5,7 +5,9 @@ import 'package:article_app/src/features/article/domain/usecases/articles_usecas
 import 'package:article_app/src/features/article/presentation/bloc/articles_bloc.dart';
 import 'package:article_app/src/features/article/presentation/bloc/articles_event.dart';
 import 'package:article_app/src/features/article/presentation/bloc/articles_state.dart';
+import 'package:article_app/src/features/article/presentation/pages/article_detail.dart';
 import 'package:article_app/src/features/article/presentation/widgets/article_header.dart';
+import 'package:article_app/src/features/article/presentation/widgets/article_row.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +38,17 @@ class _ArticlesHomeStates extends State<ArticlesHome> {
     _bloc.add(OnFetchingArticlesEvent(1, true));
   }
 
+  void didSelectArticle(ArticleModel article) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return ArticleDetail(article);
+        },
+      ),
+    );
+  }
+
   Widget _buildBody() {
     return BlocConsumer<ArticlesBloc, ArticlesState>(
       bloc: _bloc,
@@ -46,10 +59,27 @@ class _ArticlesHomeStates extends State<ArticlesHome> {
       },
       builder: (context, state) {
         if (state is SucceededArticlesState) {
-          return ListView(
-            children: [
-              ArticleHeader(_articles.first),
-            ],
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                ArticleHeader(didSelectArticle, _articles.first),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: _articles.length,
+                  scrollDirection: Axis.vertical,
+                  separatorBuilder: (_, index) => const SizedBox(width: 8),
+                  itemBuilder: (context, index) {
+                    int selected = index + 1 == _articles.length
+                        ? _articles.length - 1
+                        : index + 1;
+
+                    return ArticleRow(
+                        didSelectArticle, index + 2, _articles[selected]);
+                  },
+                )
+              ],
+            ),
           );
         }
         return const Center(
@@ -61,12 +91,3 @@ class _ArticlesHomeStates extends State<ArticlesHome> {
     );
   }
 }
-
-// return ListView.separated(
-//             itemCount: _articles.length,
-//             scrollDirection: Axis.vertical,
-//             separatorBuilder: (_, index) => const SizedBox(width: 8),
-//             itemBuilder: (context, index) {
-//               return Text('data');
-//             },
-//           );

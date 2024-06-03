@@ -1,3 +1,4 @@
+import 'package:article_app/src/core/UI/texts/texts.dart';
 import 'package:article_app/src/core/utils/constant/app_text_constant.dart';
 import 'package:article_app/src/core/utils/injection/injection.dart';
 import 'package:article_app/src/features/article/presentation/pages/articles_home.dart';
@@ -9,8 +10,7 @@ Future<void> main() async {
     MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(NEWS),
-          backgroundColor: Colors.transparent,
+          title: const AppTitle(NEWS),
           centerTitle: false,
         ),
         body: const ArticlesHome(),
